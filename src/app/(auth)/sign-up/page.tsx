@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { AuthCredentialsValidator, AuthCredentialsValidatorType } from "@/lib/validators/accountCredentialsValidator";
+import { trpc } from "@/trpc/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -19,9 +20,10 @@ const Page = () => {
   } = useForm<AuthCredentialsValidatorType>({
     resolver: zodResolver(AuthCredentialsValidator)
   });
+  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation();
 
   const onSubmit = ({ email, password }: AuthCredentialsValidatorType) => {
-    // Send data to server
+    mutate({ email, password });
   }
 
   return (
