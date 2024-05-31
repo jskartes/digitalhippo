@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -28,6 +29,7 @@ const Layout = ({
       >
         <main className="relative flex flex-col min-h-screen">
           <div className="flex-grow flex-1">
+            <Navbar />
             {children}
           </div>
         </main>
