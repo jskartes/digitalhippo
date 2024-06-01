@@ -1,9 +1,11 @@
+import AddToCartButton from "@/components/AddToCartButton";
 import ImageSlider from "@/components/ImageSlider";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import ProductReel from "@/components/ProductReel";
 import { PRODUCT_CATEGORIES } from "@/config";
 import { getPayloadClient } from "@/getPayloadClient";
 import { formatPrice } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { Check, Shield } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -97,13 +99,37 @@ const Page = async ({ params }: PageProps) => {
               </div>
             </section>
           </div>
-          <div className="mt-10 lg:col-start-2 lg:row-start-2 lg:mt-0 lg:self-center">
+          <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
             <div className="aspect-square rounded-lg">
               <ImageSlider urls={validUrls} />
             </div>
           </div>
+          <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+            <div>
+              <div className="mt-10">
+                <AddToCartButton product={product} />
+              </div>
+              <div className="mt-6 text-center">
+                <div className="group inline-flex text-sm font-medium">
+                  <Shield
+                    className="mr-2 h-5 w-5 flex-shrink-0 text-gray-400"
+                    aria-hidden
+                  />
+                  <span className="text-muted-foreground hover:text-gray-700">
+                    30-day return guarantee
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <ProductReel
+        href="/products"
+        query={{ category: product.category, limit: 4 }}
+        title={`Similar ${label}`}
+        subtitle={`Browse similar high-quality ${label} just like ${product.name}.`}
+      />
     </MaxWidthWrapper>
   );
 }

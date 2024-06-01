@@ -2,10 +2,12 @@ import { z } from "zod";
 import { getPayloadClient } from "../getPayloadClient";
 import { QueryValidator } from "../lib/validators/queryValidator";
 import { authRouter } from "./authRouter";
+import { paymentRouter } from "./paymentRouter";
 import { publicProcedure, router } from "./trpc";
 
 export const appRouter = router({
   auth: authRouter,
+  payment: paymentRouter,
   getInfiniteProducts: publicProcedure
     .input(z.object({
       limit: z.number().min(1).max(100),
